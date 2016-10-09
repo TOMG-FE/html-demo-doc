@@ -11250,7 +11250,11 @@
 
 		$('.demo').each(function(){
 			var demo = $(this);
-			var blocks = demo.find('.block');
+			var blocks = demo.find('textarea.block');
+
+			var introNode = demo.find('.intro');
+			var codeNode = demo.find('pre code');
+			var viewNode = demo.find('.view');
 
 			var viewCodes = [];
 			var runCodes = [];
@@ -11265,8 +11269,28 @@
 			});	
 
 			viewCodes = htmlEncode(viewCodes.join(''));
-			demo.find('pre code').html(viewCodes);
-			demo.find('.view').html(runCodes.join(''));
+			codeNode.html(viewCodes);
+			viewNode.html(runCodes.join(''));
+
+			var trimIntro = trim(introNode.html());
+			var trimCode = trim(codeNode.html());
+			var trimView = trim(viewNode.html());
+
+			if(!trimIntro){
+				introNode.hide();
+			}
+
+			if(!trimCode){
+				codeNode.parent().hide();
+			}
+
+			if(!trimView){
+				viewNode.hide();
+			}
+
+			if((trimIntro + trimCode + trimView) === ''){
+				demo.hide();
+			}
 		});
 
 		if(document.addEventListener){
