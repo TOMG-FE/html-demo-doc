@@ -27,11 +27,12 @@
       <textarea class="form-control block">
 <a class="btn btn-primary" id="demo1">点击按钮查看弹窗</a>
 <script>
-(function($, $tip){
+(function($, $tip, $logger){
   $('#demo1').on('click', function(){
     $tip('<p style="color:#f00;">提示文案可以使用html<p>');
+    $logger.info('可以使用下列日志函数:info,warn,debug,log,error');
   });
-})(window.jQuery, window.$tip);
+})(window.jQuery, window.$tip, window.$logger);
 </script>
       </textarea>
       <div class="intro">

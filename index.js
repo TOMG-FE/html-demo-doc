@@ -3,6 +3,7 @@ require('alertifyjs/build/css/alertify.css');
 require('alertifyjs/build/css/themes/bootstrap.css');
 
 var $ = require('./src/vendor/jquery-1.12.4');
+var $logger = require('./src/mods/logger');
 require('./src/mods/p-header');
 require('./src/mods/p-demolist');
 
@@ -12,6 +13,10 @@ if(!window.jQuery){
 
 if(!window.$){
 	window.$ = $;
+}
+
+if(!window.$logger){
+	window.$logger = $logger;
 }
 
 var tip = null;

@@ -8,7 +8,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>html-demo-doc</title>
-<link href="../css/demo.css?95189c20bea4853577d0" rel="stylesheet"></head>
+<link href="../css/demo.css?cf7530532cdf2e48557b" rel="stylesheet"></head>
 <body>
 <div class="container" style="display: none">
 
@@ -27,18 +27,20 @@
       <textarea class="form-control block">
 <a class="btn btn-primary" id="demo1">点击按钮查看弹窗</a>
 <script>
-(function($, $tip){
+(function($, $tip, $logger){
   $('#demo1').on('click', function(){
     $tip('<p style="color:#f00;">提示文案可以使用html<p>');
+    $logger.info('可以使用下列日志函数:info,warn,debug,log,error');
   });
-})(window.jQuery, window.$tip);
+})(window.jQuery, window.$tip, window.$logger);
 </script>
       </textarea>
       <div class="intro">
         <p>在 textarea 里面填充代码。</p>
         <p>代码会被执行，并高亮展示。</p>
         <p>示例 demo 代码参见 html 源代码中的 div.demo 。 </p>
-        <p>每个示例 div 内部结构应保持一致。</p>
+        <p>每个示例 div 内部结构应保持一致，都放在 div.p-demolist 下。</p>
+        <p>文档默认样式为 bootstrap 。</p>
       </div>
       <pre><code class="html"></code></pre>
       <div class="view"></div>
@@ -48,5 +50,5 @@
 
 </div>
 <div style="height: 300px"></div>
-<script type="text/javascript" src="../js/demo.js?95189c20bea4853577d0"></script></body>
+<script type="text/javascript" src="../js/demo.js?cf7530532cdf2e48557b"></script></body>
 </html>

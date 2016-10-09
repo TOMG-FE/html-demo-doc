@@ -100,8 +100,9 @@
 	__webpack_require__(9);
 
 	var $ = __webpack_require__(10);
-	__webpack_require__(11);
-	__webpack_require__(13);
+	var $logger = __webpack_require__(11);
+	__webpack_require__(12);
+	__webpack_require__(14);
 
 	if(!window.jQuery){
 		window.jQuery = $;
@@ -111,24 +112,28 @@
 		window.$ = $;
 	}
 
-	$('.container').css('display', '');
+	if(!window.$logger){
+		window.$logger = $logger;
+	}
+
+	var tip = null;
+	if(!window.$tip){
+		window.$tip = function(){
+			if(typeof tip === 'function'){
+				tip.apply(null, arguments);
+			}
+		};
+	}
 
 	if(document.addEventListener){
-
-		var tip = null;
 		__webpack_require__.e/* nsure */(2, function(require){
-			tip = __webpack_require__(184);
+			tip = __webpack_require__(185);
 		});
-
-		if(!window.$tip){
-			window.$tip = function(){
-				if(typeof tip === 'function'){
-					tip.apply(null, arguments);
-				}
-			};
-		}
-
 	}
+
+	$('.container').css('display', '');
+
+
 
 
 /***/ },
@@ -11171,22 +11176,48 @@
 
 /***/ },
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	__webpack_require__(12);
+	
+	var logger = {};
+
+	var levels = ['info','warn','debug','log', 'error'];
+
+	var i = 0;
+	var level = '';
+
+	for(i = 0; i < levels.length; i++){
+		(function(level){
+			logger[level] = function(){
+				if(window && window.console && typeof window.console[level] === 'function'){
+					window.console[level].apply(window.console, arguments);
+				}
+			};
+		})(levels[i]);
+	}
+
+	module.exports = logger;
+
+
 
 /***/ },
 /* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(13);
+
+/***/ },
+/* 13 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(14);
 	__webpack_require__(15);
+	__webpack_require__(16);
 
 	var $ = __webpack_require__(10);
 
@@ -11240,7 +11271,7 @@
 
 		if(document.addEventListener){
 			__webpack_require__.e/* nsure */(1, function(require){
-				var $hljs = __webpack_require__(16);
+				var $hljs = __webpack_require__(17);
 				$('pre code').each(function(i, block) {
 					$hljs.highlightBlock(block);
 				});
@@ -11253,13 +11284,13 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

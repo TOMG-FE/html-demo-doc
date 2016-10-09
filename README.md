@@ -21,4 +21,5 @@ require('html-demo-doc');
 
 ## Release History
 
+ * 2016-10-09 v0.1.1 添加 $logger 全局对象。
  * 2016-10-09 v0.1.0 发布第一个正式版。
