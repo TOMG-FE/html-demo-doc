@@ -122,7 +122,7 @@ webpackConfig.plugins.push(
 		//js插入的位置，true/'head'/'body'/false
 		inject: 'body',
 		//为静态资源生成hash值
-		hash: true,
+		hash: false,
 		//需要引入的chunk，不配置就会引入所有页面的资源
 		chunks: [
 			'demo'
@@ -131,7 +131,7 @@ webpackConfig.plugins.push(
 		//压缩HTML文件
 		minify: {
 			//移除HTML中的注释
-			removeComments: true,
+			removeComments: false,
 			//删除空白符与换行符
 			collapseWhitespace: false
 		}
