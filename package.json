@@ -22,6 +22,8 @@
   "files": [
     "src",
     "index.js",
+    "webpack.config.js",
+    "webpack.dev.js",
     "README.md",
     "LICENSE"
   ],
