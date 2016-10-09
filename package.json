@@ -19,6 +19,12 @@
     "url": "https://github.com/TOMG-FE/html-demo-doc/issues"
   },
   "homepage": "https://github.com/TOMG-FE/html-demo-doc#readme",
+  "files": [
+    "src",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "dependencies": {
     "alertifyjs": "^1.8.0",
     "bootstrap": "^3.3.7",
