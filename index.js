@@ -1,8 +1,6 @@
 require('bootstrap/dist/css/bootstrap.css');
-require('alertifyjs/build/css/alertify.css');
-require('alertifyjs/build/css/themes/bootstrap.css');
 
-var $ = require('./src/vendor/jquery-1.12.4');
+var $ = require('jquery');
 var $logger = require('./src/mods/logger');
 require('./src/mods/p-header');
 require('./src/mods/p-demolist');
@@ -19,19 +17,11 @@ if(!window.$logger){
 	window.$logger = $logger;
 }
 
+var $tip = require('./src/mods/tip');
+
 var tip = null;
 if(!window.$tip){
-	window.$tip = function(){
-		if(typeof tip === 'function'){
-			tip.apply(null, arguments);
-		}
-	};
-}
-
-if(document.addEventListener){
-	require.ensure([], function(require){
-		tip = require('./src/mods/tip');
-	});
+	window.$tip = $tip;
 }
 
 $('.container').css('display', '');

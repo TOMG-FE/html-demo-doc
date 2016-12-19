@@ -1,6 +1,8 @@
-var $alertify = require('alertifyjs');
+require('./tip.less');
+var $ = require('jquery');
+var $growl = require('bootstrap-growl');
 
 module.exports = function(msg){
-	$alertify.warning(msg);
+	$.notify(msg);
 };
 

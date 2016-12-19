@@ -25,25 +25,27 @@
 
     <!-- 基本结构 -->
     <div class="demo">
+      <!-- 在这个 textarea 写代码 -->
       <textarea class="form-control block">
       </textarea>
+      <!-- 在这个 div.intro 写说明 -->
       <div class="intro">
       </div>
+      <!-- 代码会被展示到这个 code.html -->
       <pre><code class="html"></code></pre>
+      <!-- 代码运行结果输出到 .view -->
       <div class="view"></div>
+      <!-- 全部内容为空，则模块不会被展示到页面 -->
     </div>
 
     <!-- 示例 -->
     <div class="demo">
-      <textarea class="form-control block">
-<a class="btn btn-primary" id="demo1">点击按钮查看弹窗</a>
+      <textarea class="form-control block html">
+<a class="btn btn-primary" id="demo1">点击按钮1</a>
 <script>
-(function($, $tip, $logger){
-  $('#demo1').on('click', function(){
-    $tip('<p style="color:#f00;">提示文案可以使用html<p>');
-    $logger.info('可以使用下列日志函数:info,warn,debug,log,error');
-  });
-})(window.jQuery, window.$tip, window.$logger);
+$('#demo1').on('click', function(){
+  alert('按钮1被点击');
+});
 </script>
       </textarea>
       <div class="intro">
@@ -52,6 +54,57 @@
         <p>示例 demo 代码参见 html 源代码中的 div.demo 。 </p>
         <p>每个示例 div 内部结构应保持一致，都放在 div.p-demolist 下。</p>
         <p>文档默认样式为 bootstrap 。</p>
+        <p>内容为空的部分不会被展示出来</p>
+      </div>
+      <pre><code class="html"></code></pre>
+      <div class="view"></div>
+    </div>
+
+    <div class="demo">
+      <textarea class="form-control block html">
+<a class="btn btn-primary" id="demo2">点击按钮2</a>
+<script>
+$('#demo2').on('click', function(){
+  $tip('<p style="color:#f00;">提示文案可以使用html<p>');
+});
+</script>
+      </textarea>
+      <div class="intro">
+        <p>可调用全局方法$tip，展示提示浮层</p>
+        <p>参数可以传递html</p>
+      </div>
+      <pre><code class="html"></code></pre>
+      <div class="view"></div>
+    </div>
+
+    <div class="demo">
+      <textarea class="form-control block html">
+<a class="btn btn-primary" id="demo3">点击按钮3</a>
+<script>
+$('#demo3').on('click', function(){
+  $logger.info('可以使用下列日志函数:info,warn,debug,log,error');
+});
+</script>
+      </textarea>
+      <div class="intro">
+        <p>可调用全局对象$logger，在控制台展示信息</p>
+        <p>兼容IE8，没有console对象时忽略信息输出</p>
+      </div>
+      <pre><code class="html"></code></pre>
+      <div class="view"></div>
+    </div>
+
+    <!-- 示例 -->
+    <div class="demo">
+      <textarea class="form-control block html">
+<script>
+var abc = 1;
+console.log(window.abc);  //undefined
+console.log(abc);  //1
+</script>
+      </textarea>
+      <div class="intro">
+        <p>每个示例的代码块被包装到闭包，不会污染全局作用域。</p>
       </div>
       <pre><code class="html"></code></pre>
       <div class="view"></div>

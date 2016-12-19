@@ -1,7 +1,8 @@
 require('highlight.js/styles/xcode.css');
 require('./p-demolist.less');
 
-var $ = require('../../vendor/jquery-1.12.4');
+var $ = require('jquery');
+var $hljs = require('highlight.js/lib');
 
 function htmlEncode(str){
 	if(typeof str !== 'string'){
@@ -35,52 +36,74 @@ setTimeout(function(){
 		var blocks = demo.find('textarea.block');
 
 		var introNode = demo.find('.intro');
-		var codeNode = demo.find('pre code');
+		var htmlCodeNode = demo.find('pre .html');
+		var scriptCodeNode = demo.find('pre .script');
 		var viewNode = demo.find('.view');
 
+		var htmlCodes = [];
+		var scriptCodes = [];
 		var viewCodes = [];
-		var runCodes = [];
 
 		blocks.each(function(){
 			var block = $(this);
-			var blockCodes = trim(block.val());
+			var blockCodes = trim(block.get(0).value);
 			viewCodes.push(blockCodes);
-			if(block.attr('autorun') !== 'false'){
-				runCodes.push(blockCodes);
-			}
-		});	
 
-		viewCodes = htmlEncode(viewCodes.join(''));
-		codeNode.html(viewCodes);
-		viewNode.html(runCodes.join(''));
+			var strHtml = blockCodes.replace(/<script[^>]*>[\r\n\w\W]+<\/script>/ig, function(str){
+				scriptCodes.push(
+					str.replace(/<script[^>]*>|<\/script>/ig, '')
+				);
+				return '';
+			});
+			if(scriptCodes.length > 0){
+				scriptCodes.unshift('(function(){');
+				scriptCodes.unshift('<script>');
+				scriptCodes.push('})();');
+				scriptCodes.push('</script>');
+			}
+
+			htmlCodes.push(strHtml);
+			if(block.attr('autorun') === 'false'){
+				scriptCodes.length = 0;
+			}
+		});
+
+		htmlCodeNode.html(
+			htmlEncode(viewCodes.join(''))
+		);
+		viewNode.html(htmlCodes.join(''));
+		viewNode.parent().append(scriptCodes.join('\n'));
 
 		var trimIntro = trim(introNode.html());
-		var trimCode = trim(codeNode.html());
+		var trimHtmlCode = trim(htmlCodeNode.html());
+		var trimScriptCode = trim(scriptCodeNode.html());
 		var trimView = trim(viewNode.html());
 
 		if(!trimIntro){
 			introNode.hide();
 		}
 
-		if(!trimCode){
-			codeNode.parent().hide();
+		if(!trimHtmlCode){
+			htmlCodeNode.parent().hide();
+		}
+
+		if(!trimScriptCode){
+			scriptCodeNode.parent().hide();
 		}
 
 		if(!trimView){
 			viewNode.hide();
 		}
 
-		if((trimIntro + trimCode + trimView) === ''){
+		if((trimIntro + trimHtmlCode + trimScriptCode + trimView) === ''){
 			demo.hide();
 		}
 	});
 
+	
 	if(document.addEventListener){
-		require.ensure([], function(require){
-			var $hljs = require('highlight.js/lib');
-			$('pre code').each(function(i, block) {
-				$hljs.highlightBlock(block);
-			});
+		$('pre code').each(function(i, block) {
+			$hljs.highlightBlock(block);
 		});
 	}
 });
