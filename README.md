@@ -9,7 +9,7 @@
 npm install html-demo-doc --save-dev
 ```
 
-- 在由于构建示例的代码中引用该组件:
+- 在要构建示例的代码中引用该组件:
 
 ```js
 require('html-demo-doc');
