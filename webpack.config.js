@@ -147,6 +147,15 @@ if(process.env.NODE_ENV === 'production'){
 		//单独使用link标签加载css并设置路径，相对于output配置中的publickPath
 		new $extractTextPlugin('css/[name].css')
 	);
+
+	webpackConfig.plugins.push(
+		//压缩JS
+		new $webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		})
+	);
 }else{
 	$webpackHmrEntryReplace(webpackConfig);
 }

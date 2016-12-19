@@ -2,7 +2,7 @@ require('highlight.js/styles/xcode.css');
 require('./p-demolist.less');
 
 var $ = require('jquery');
-var $hljs = require('highlight.js/lib');
+var $hljs = require('../highlight/index');
 
 function htmlEncode(str){
 	if(typeof str !== 'string'){
