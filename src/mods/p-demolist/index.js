@@ -43,18 +43,23 @@ setTimeout(function(){
 		var htmlCodes = [];
 		var scriptCodes = [];
 		var viewCodes = [];
+		var scriptHtml = [];
 
 		blocks.each(function(){
 			var block = $(this);
 			var blockCodes = trim(block.get(0).value);
 			viewCodes.push(blockCodes);
 
-			var strHtml = blockCodes.replace(/<script[^>]*>[\r\n\w\W]+<\/script>/ig, function(str){
-				scriptCodes.push(
-					str.replace(/<script[^>]*>|<\/script>/ig, '')
-				);
+			var strHtml = blockCodes.replace(/<script[^>]*>[\r\n\w\W]*<\/script>/ig, function(str){
+				var strScript = str.replace(/<script[^>]*>|<\/script>/ig, '');
+				if(strScript){
+					scriptCodes.push(strScript);
+				}else{
+					scriptHtml.push(str);
+				}
 				return '';
 			});
+
 			if(scriptCodes.length > 0){
 				scriptCodes.unshift('(function(){');
 				scriptCodes.unshift('<script>');
@@ -72,7 +77,9 @@ setTimeout(function(){
 			htmlEncode(viewCodes.join(''))
 		);
 		viewNode.html(htmlCodes.join(''));
-		viewNode.parent().append(scriptCodes.join('\n'));
+		viewNode.parent()
+			.append(scriptCodes.join('\n'))
+			.append(scriptHtml.join('\n'));
 
 		var trimIntro = trim(introNode.html());
 		var trimHtmlCode = trim(htmlCodeNode.html());

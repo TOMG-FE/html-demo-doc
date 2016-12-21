@@ -1,6 +1,6 @@
 {
   "name": "html-demo-doc",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "自动执行代码示例的文档",
   "main": "index.js",
   "scripts": {
